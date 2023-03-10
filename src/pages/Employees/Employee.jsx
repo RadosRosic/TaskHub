@@ -23,7 +23,6 @@ export async function loader({ params }) {
     );
   } else {
     const resData = await response.json();
-    console.log(id, resData);
     return resData;
   }
 }

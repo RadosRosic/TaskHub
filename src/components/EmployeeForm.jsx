@@ -1,10 +1,5 @@
 import { Form, json, redirect } from "react-router-dom";
 import { TextField, Stack, Button, Paper, Input } from "@mui/material";
-// import { LocalizationProvider } from "@mui/x-date-pickers";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-// import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-// import { useState } from "react";
-// import dayjs from "dayjs";
 
 const EmployeeForm = ({ method, employee }) => {
   return (
@@ -75,8 +70,6 @@ export async function action({ request, params }) {
     salary: data.get("salary"),
     dateOfBirth: data.get("dateOfBirth"),
   };
-
-  console.log(newEmployeeData.dateOfBirth);
 
   let url = "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/employees";
 
