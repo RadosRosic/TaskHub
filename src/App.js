@@ -1,9 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import HomePage from "./pages/Home";
 import RootLayout from "./pages/RootLayout";
 import EmployeesPage, { loader as employeeLoader } from "./pages/Employees";
 import TasksPage, { loader as tasksLoader } from "./pages/Tasks";
 import ErrorPage from "./pages/Error";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -47,7 +57,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
