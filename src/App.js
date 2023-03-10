@@ -1,15 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/Home";
-import RootLayout from "./pages/RootLayout";
-import EmployeesPage, { loader as employeeLoader } from "./pages/Employees";
+import Root from "./pages/Root";
+import EmployeesPage, { loader as employeesLoader } from "./pages/Employees";
+import NewEmployeePage from "./pages/Employees/New";
+import EditEmployeePage from "./pages/Employees/Edit";
 import TasksPage, { loader as tasksLoader } from "./pages/Tasks";
 import ErrorPage from "./pages/Error";
 
+import { action as employeeHttpAction } from "./components/EmployeeForm";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import EditEmployeePage from "./pages/EmployeeForm";
-import NewEmployeePage from "./pages/EmployeeForm";
+import Employee, { loader as employeeLoader } from "./pages/Employees/Employee";
 
 const darkTheme = createTheme({
   palette: {
@@ -20,7 +23,7 @@ const darkTheme = createTheme({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
@@ -43,22 +46,24 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EmployeesPage />,
-            loader: employeeLoader,
+            loader: employeesLoader,
           },
           {
             path: "new-employee",
             element: <NewEmployeePage />,
+            action: employeeHttpAction,
           },
           {
+            id: "employee",
             path: ":employeeID",
+            loader: employeeLoader,
+
             children: [
-              { index: true, element: <p>Employee ID</p> },
+              { index: true, element: <Employee /> },
               {
                 path: "edit-employee",
                 element: <EditEmployeePage />,
-                action: () => {
-                  console.log("xd");
-                },
+                action: employeeHttpAction,
               },
             ],
           },

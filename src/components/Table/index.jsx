@@ -55,7 +55,7 @@ const MyTable = ({
               <TableCell>{data.salary}</TableCell>
               <TableCell>{formatDate(data.dateOfBirth)}</TableCell>
               <TableCell sx={{ width: 20 }}>
-                <IconButton>
+                <IconButton onClick={() => deleteEmployeeHandler(data.id)}>
                   <PersonRemoveIcon />
                 </IconButton>
               </TableCell>
@@ -65,9 +65,9 @@ const MyTable = ({
                 </Link>
               </TableCell>
               <TableCell sx={{ width: 20 }}>
-                <IconButton>
+                <Link to={data.id}>
                   <VisibilityIcon />
-                </IconButton>
+                </Link>
               </TableCell>
             </TableRow>
           ))}
