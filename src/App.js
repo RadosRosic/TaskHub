@@ -8,6 +8,8 @@ import ErrorPage from "./pages/Error";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import EditEmployeePage from "./pages/EmployeeForm";
+import NewEmployeePage from "./pages/EmployeeForm";
 
 const darkTheme = createTheme({
   palette: {
@@ -44,10 +46,20 @@ const router = createBrowserRouter([
             loader: employeeLoader,
           },
           {
+            path: "new-employee",
+            element: <NewEmployeePage />,
+          },
+          {
             path: ":employeeID",
             children: [
               { index: true, element: <p>Employee ID</p> },
-              { path: "edit-employee", element: <p>Edit Employee</p> },
+              {
+                path: "edit-employee",
+                element: <EditEmployeePage />,
+                action: () => {
+                  console.log("xd");
+                },
+              },
             ],
           },
         ],

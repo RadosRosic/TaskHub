@@ -9,6 +9,8 @@ import {
   IconButton,
 } from "@mui/material";
 
+import { Link } from "react-router-dom";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
@@ -58,9 +60,9 @@ const MyTable = ({
                 </IconButton>
               </TableCell>
               <TableCell sx={{ width: 20 }}>
-                <IconButton>
+                <Link to={`${data.id}/edit-employee`}>
                   <ModeEditIcon />
-                </IconButton>
+                </Link>
               </TableCell>
               <TableCell sx={{ width: 20 }}>
                 <IconButton>

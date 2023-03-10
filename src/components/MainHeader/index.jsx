@@ -25,18 +25,6 @@ const Navigation = () => {
         >
           Tasks
         </NavLink>
-        <NavLink
-          to="/projects"
-          className={({ isActive }) => (isActive ? classes.active : undefined)}
-        >
-          Projects
-        </NavLink>
-        <NavLink
-          to="/teams"
-          className={({ isActive }) => (isActive ? classes.active : undefined)}
-        >
-          Teams
-        </NavLink>
       </nav>
     </header>
   );
