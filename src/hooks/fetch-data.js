@@ -20,12 +20,12 @@ const useFetch = () => {
     }
   };
 
-  const setData = async (path, setter) => {
-    const response = await makeRequest({ path });
+  const setData = async (requestConfig, setter) => {
+    const response = await makeRequest(requestConfig);
     setter(response);
   };
 
-  return { setData };
+  return { makeRequest, setData };
 };
 
 export default useFetch;

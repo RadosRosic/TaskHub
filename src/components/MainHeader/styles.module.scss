@@ -1,0 +1,19 @@
+@use "../../style/mixins.scss" as mixin;
+@use "../../style/colors.scss" as colors;
+
+.main-header {
+  @include mixin.flex-between-center;
+  color: colors.$text-primary;
+  background-color: colors.$primary;
+  padding: 10px;
+}
+
+.main-navigation {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.active {
+  color: gold;
+}
