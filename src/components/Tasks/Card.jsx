@@ -13,6 +13,9 @@ const TaskCard = ({ task }) => {
     <Card>
       <CardContent>
         <Typography variant="h6" component="h3">
+          {task.assignee}
+        </Typography>
+        <Typography variant="h6" component="h3">
           {task.title}
         </Typography>
         <Typography variant="subtitle2">{formatDate(task.dueDate)}</Typography>

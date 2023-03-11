@@ -1,23 +1,14 @@
 import { useState } from "react";
-import { useLoaderData, json, useNavigate } from "react-router-dom";
+import { useRouteLoaderData, json, useNavigate } from "react-router-dom";
+
 import Table from "../../components/Table";
-const cellNames = [
-  "Name",
-  "Email",
-  "Phone",
-  "Salary",
-  "Birthday",
-  "Remove",
-  "Edit",
-  "View",
-];
 
 const Employees = () => {
-  const data = [...useLoaderData()];
+  const data = [...useRouteLoaderData("employees")];
   const navigate = useNavigate();
   const [sortBy, setSortBy] = useState("name");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(7);
   const lastPage = Math.ceil(data.length / pageSize);
 
   const deleteEmployeeHandler = async (id) => {
@@ -54,16 +45,17 @@ const Employees = () => {
   }
 
   return (
-    <Table
-      cellNames={cellNames}
-      bodyData={data}
-      page={page}
-      setPage={setPage}
-      setSortBy={setSortBy}
-      pageSize={pageSize}
-      deleteEmployeeHandler={deleteEmployeeHandler}
-      lastPage={lastPage}
-    />
+    <>
+      <Table
+        bodyData={data}
+        page={page}
+        setPage={setPage}
+        setSortBy={setSortBy}
+        pageSize={pageSize}
+        deleteEmployeeHandler={deleteEmployeeHandler}
+        lastPage={lastPage}
+      />
+    </>
   );
 };
 

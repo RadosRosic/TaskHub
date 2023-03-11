@@ -1,10 +1,14 @@
-import { useState } from "react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-const DatePicker = ({ name, disablePast, disableFuture, label }) => {
-  const [value, setValue] = useState(null);
-
+const DatePicker = ({
+  name,
+  disablePast,
+  disableFuture,
+  label,
+  date,
+  setDate,
+}) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -12,13 +16,13 @@ const DatePicker = ({ name, disablePast, disableFuture, label }) => {
           label={label}
           disablePast={disablePast}
           disableFuture={disableFuture}
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
+          value={date}
+          onChange={(newDate) => setDate(newDate)}
         />
       </LocalizationProvider>
       <input
         type="text"
-        defaultValue={value?._d}
+        value={date?._d}
         name={name}
         style={{ display: "none" }}
       />

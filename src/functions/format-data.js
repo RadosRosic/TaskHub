@@ -12,10 +12,10 @@ export const shortenEmail = (email) => {
   let domain = email.slice(atIndex + 1);
 
   if (name.length > 5) {
-    name = name.slice(0, 3).concat("...");
+    name = name.slice(0, 4).concat("...");
   }
   if (domain.length > 3) {
-    domain = "...".concat(domain.slice(-3));
+    domain = "...".concat(domain.slice(-7));
   }
 
   return `${name}@${domain}`;

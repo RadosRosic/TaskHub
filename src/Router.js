@@ -30,6 +30,7 @@ const router = createBrowserRouter([
           {
             path: "new-task",
             element: <NewTaskPage />,
+            loader: employeesLoader,
             action: taskHttpAction,
           },
           {
@@ -47,12 +48,13 @@ const router = createBrowserRouter([
         ],
       },
       {
+        id: "employees",
         path: "employees",
+        loader: employeesLoader,
         children: [
           {
             index: true,
             element: <EmployeesPage />,
-            loader: employeesLoader,
           },
           {
             path: "new-employee",
