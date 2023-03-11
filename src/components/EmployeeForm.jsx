@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Form, json, redirect } from "react-router-dom";
 import { TextField, Stack, Button, Paper, Input } from "@mui/material";
+import DatePicker from "./DatePicker";
 
 const EmployeeForm = ({ method, employee }) => {
+  const [name, setName] = useState(employee ? employee.name : "");
+  const [email, setEmail] = useState(employee ? employee.email : "");
   return (
     <Paper
       sx={{
@@ -19,14 +23,15 @@ const EmployeeForm = ({ method, employee }) => {
             variant="standard"
             name="name"
             required
-            defaultValue={employee ? employee.name : ""}
+            value={name}
           />
           <TextField
             label="Email"
             variant="standard"
             name="email"
+            type="email"
             required
-            defaultValue={employee ? employee.email : ""}
+            value={email}
           />
           <TextField
             label="Phone"
@@ -42,11 +47,10 @@ const EmployeeForm = ({ method, employee }) => {
             required
             defaultValue={employee ? employee.salary : ""}
           />
-          <TextField
-            type="date"
+          <DatePicker
             name="dateOfBirth"
-            required
-            defaultValue={employee ? employee.dateOfBirth : null}
+            disableFuture={true}
+            label="Date of Birth"
           />
           <Button variant="contained" type="submit">
             Submit

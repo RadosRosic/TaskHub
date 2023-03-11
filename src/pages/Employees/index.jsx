@@ -1,5 +1,5 @@
-import { useLoaderData, json, useNavigate, useSubmit } from "react-router-dom";
 import { useState } from "react";
+import { useLoaderData, json, useNavigate } from "react-router-dom";
 import Table from "../../components/Table";
 const cellNames = [
   "Name",
@@ -18,7 +18,7 @@ const Employees = () => {
   const [sortBy, setSortBy] = useState("name");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const submit = useSubmit();
+  const lastPage = Math.ceil(data.length / pageSize);
 
   const deleteEmployeeHandler = async (id) => {
     const confirm = window.confirm("Are you sure?");
@@ -59,8 +59,10 @@ const Employees = () => {
       bodyData={data}
       page={page}
       setPage={setPage}
+      setSortBy={setSortBy}
       pageSize={pageSize}
       deleteEmployeeHandler={deleteEmployeeHandler}
+      lastPage={lastPage}
     />
   );
 };

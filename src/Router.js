@@ -2,14 +2,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/Home";
 import Root from "./pages/Root";
+import ErrorPage from "./pages/Error";
+
 import EmployeesPage, { loader as employeesLoader } from "./pages/Employees";
 import Employee, { loader as employeeLoader } from "./pages/Employees/Employee";
 import NewEmployeePage from "./pages/Employees/New";
 import EditEmployeePage from "./pages/Employees/Edit";
+
 import TasksPage, { loader as tasksLoader } from "./pages/Tasks/Tasks";
 import NewTaskPage from "./pages/Tasks/New";
 import EditTaskPage from "./pages/Tasks/Edit";
-import ErrorPage from "./pages/Error";
 
 import { action as taskHttpAction } from "./components/TaskForm";
 import { action as employeeHttpAction } from "./components/EmployeeForm";

@@ -1,8 +1,9 @@
-import React from "react";
-import { json } from "react-router-dom";
+import { json, useRouteLoaderData } from "react-router-dom";
 
 const Employee = () => {
-  return <div>Employee</div>;
+  const data = useRouteLoaderData("employee");
+
+  return <div>{data.name}</div>;
 };
 
 export default Employee;
