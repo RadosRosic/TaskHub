@@ -6,7 +6,7 @@ const DatePicker = ({
   disablePast,
   disableFuture,
   label,
-  date,
+  value,
   setDate,
 }) => {
   return (
@@ -16,13 +16,13 @@ const DatePicker = ({
           label={label}
           disablePast={disablePast}
           disableFuture={disableFuture}
-          value={date}
+          value={value}
           onChange={(newDate) => setDate(newDate)}
         />
       </LocalizationProvider>
       <input
         type="text"
-        value={date?._d}
+        value={value?._d}
         name={name}
         style={{ display: "none" }}
       />

@@ -22,7 +22,7 @@ export const shortenEmail = (email) => {
 };
 
 export const shortenText = (text) => {
-  if (text.length > 140) {
-    return text.slice(0, 140).concat("...");
+  if (text.length > 130) {
+    return text.slice(0, 130).concat("...");
   } else return text;
 };

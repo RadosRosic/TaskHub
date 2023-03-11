@@ -1,9 +1,10 @@
 import { json, useRouteLoaderData } from "react-router-dom";
+import Profile from "../../components/Profile";
 
 const Employee = () => {
   const data = useRouteLoaderData("employee");
 
-  return <div>{data.name}</div>;
+  return <Profile employee={data} />;
 };
 
 export default Employee;

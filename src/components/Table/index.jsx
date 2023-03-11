@@ -100,8 +100,7 @@ const MyTable = ({
                 )}
                 {matches475px && <TableCell>{employee.salary}€</TableCell>}
                 {matches960px && (
-                  <TableCell>{employee.dateOfBirth}</TableCell>
-                  // <TableCell>{formatDate(employee.dateOfBirth)}</TableCell>
+                  <TableCell>{formatDate(employee.dateOfBirth)}</TableCell>
                 )}
                 <TableCell>
                   <Link to={`${employee.id}/edit-employee`}>

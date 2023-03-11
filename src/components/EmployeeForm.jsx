@@ -3,10 +3,8 @@ import { Form, json, redirect } from "react-router-dom";
 import { TextField, Stack, Button, Typography } from "@mui/material";
 import DatePicker from "./DatePicker";
 import FormWrapper from "./FormWrapper";
-import moment from "moment";
 
 const EmployeeForm = ({ method, employee }) => {
-  const formTitle = method === "POST" ? "Create employee" : "Edit employee";
   const [name, setName] = useState(employee ? employee.name : "");
   const [lastName, setLastName] = useState(employee ? employee.name : "");
   const [email, setEmail] = useState(employee ? employee.email : "");
@@ -14,9 +12,12 @@ const EmployeeForm = ({ method, employee }) => {
     employee ? employee.phoneNumber : ""
   );
   const [salary, setSalary] = useState(employee ? employee.salary : "");
-  const [date, setDate] = useState(null);
+  const [birthdate, setBirthdate] = useState(null);
 
-  const allEntered = name && lastName && email && phoneNumber && salary && date;
+  const formTitle = method === "POST" ? "Create employee" : "Edit employee";
+
+  const allEntered =
+    name && lastName && email && phoneNumber && salary && birthdate;
 
   const handleNameChange = (e, stateDispatch) => {
     let name = e.target.value.replace(/[^a-zA-Z\s]/g, "");
@@ -106,8 +107,8 @@ const EmployeeForm = ({ method, employee }) => {
             <DatePicker
               label="Date of Birth *"
               name="dateOfBirth"
-              date={date}
-              setDate={setDate}
+              value={birthdate}
+              setDate={setBirthdate}
               disableFuture={true}
             />
           )}

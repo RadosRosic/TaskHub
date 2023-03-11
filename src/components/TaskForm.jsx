@@ -1,4 +1,5 @@
-import { Form, json, redirect, useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { Form, json, redirect } from "react-router-dom";
 import {
   TextField,
   Stack,
@@ -6,51 +7,46 @@ import {
   Autocomplete,
   Typography,
 } from "@mui/material";
+
 import DatePicker from "./DatePicker";
 import FormWrapper from "./FormWrapper";
 
-const TaskForm = ({ method, task }) => {
-  const data = useLoaderData();
-  const options = data.map((employee) => {
-    return {
-      employeeID: employee.id,
-      label: `${employee.lastName} ${employee.name}`,
-    };
-  });
-  options.sort((a, b) => a.label.localeCompare(b.label));
+const TaskForm = ({ method, task, options }) => {
+  const [title, setTitle] = useState(task ? task.title : "");
+  const [assignee, setAssignee] = useState(task ? task.assignee : "");
+  const [dueDate, setDueDate] = useState(null);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
   const formTitle = method === "POST" ? "Create task" : "Edit task";
 
   return (
     <FormWrapper>
       <Form method={method}>
-        <Stack width={300} m="auto" p={2} spacing={2}>
+        <Stack width={350} m="auto" p={1} spacing={2}>
           <Typography variant="h5" element="h2" textAlign="center">
             {formTitle}
           </Typography>
           <TextField
             label="Title"
-            variant="standard"
             name="title"
             required
-            defaultValue={task ? task.title : ""}
-          />
-          <TextField
-            label="Description"
+            value={title}
+            onChange={(e) => handleTitleChange(e)}
             variant="standard"
-            name="description"
-            required
-            defaultValue={task ? task.description : ""}
           />
+
           <Autocomplete
             options={options}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="Assignee"
-                variant="standard"
                 name="assignee"
                 required
+                variant="standard"
               />
             )}
           />
@@ -63,7 +59,22 @@ const TaskForm = ({ method, task }) => {
               defaultValue={task ? task.completed : ""}
             />
           )}
-          <DatePicker name="dueDate" disablePast={true} label="Due Date *" />
+          <DatePicker
+            name="dueDate"
+            disablePast={true}
+            label="Due Date *"
+            value={dueDate}
+            setDate={setDueDate}
+          />
+          <TextField
+            label="Description"
+            name="description"
+            multiline
+            rows={6}
+            required
+            variant="outlined"
+            defaultValue={task ? task.description : ""}
+          />
           <Button variant="contained" type="submit">
             Submit
           </Button>

@@ -11,29 +11,6 @@ const Employees = () => {
   const [pageSize, setPageSize] = useState(7);
   const lastPage = Math.ceil(data.length / pageSize);
 
-  const deleteEmployeeHandler = async (id) => {
-    const confirm = window.confirm("Are you sure?");
-
-    if (confirm) {
-      const response = await fetch(
-        "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/employees/" + id,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw json(
-          { message: "Could not delete employee" },
-          {
-            status: 500,
-          }
-        );
-      }
-      navigate(0);
-    }
-  };
-
   if (sortBy === "name") {
     data.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === "email") {
@@ -52,7 +29,6 @@ const Employees = () => {
         setPage={setPage}
         setSortBy={setSortBy}
         pageSize={pageSize}
-        deleteEmployeeHandler={deleteEmployeeHandler}
         lastPage={lastPage}
       />
     </>

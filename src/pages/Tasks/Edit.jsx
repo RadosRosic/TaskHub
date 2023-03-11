@@ -1,9 +1,19 @@
 import TaskForm from "../../components/TaskForm";
-import { useRouteLoaderData } from "react-router-dom";
+import { useRouteLoaderData, useLoaderData } from "react-router-dom";
 
-const NewTask = () => {
-  const data = useRouteLoaderData("task");
-  return <TaskForm method="PUT" task={data} />;
+const EditTask = () => {
+  const data = useLoaderData();
+  const task = useRouteLoaderData("task");
+  const options = data?.map((employee) => {
+    return {
+      employeeID: employee.id,
+      label: `${employee.lastName} ${employee.name}`,
+    };
+  });
+  options?.sort((a, b) => a.label.localeCompare(b.label));
+
+  console.log(options);
+  return <TaskForm method="PUT" task={task} options={options} />;
 };
 
-export default NewTask;
+export default EditTask;

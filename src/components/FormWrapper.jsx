@@ -12,8 +12,9 @@ const FormWrapper = (props) => {
     >
       <Paper
         sx={{
-          maxWidth: "500px",
-          p: 5,
+          maxWidth: "550px",
+          px: 4,
+          py: 2,
         }}
         elevation={5}
       >

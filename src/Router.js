@@ -5,10 +5,13 @@ import Root from "./pages/Root";
 import ErrorPage from "./pages/Error";
 
 import EmployeesPage, { loader as employeesLoader } from "./pages/Employees";
-import Employee, { loader as employeeLoader } from "./pages/Employees/Employee";
+import EmployeePage, {
+  loader as employeeLoader,
+} from "./pages/Employees/Employee";
 import NewEmployeePage from "./pages/Employees/New";
 import EditEmployeePage from "./pages/Employees/Edit";
 
+import TaskPage, { loader as taskLoader } from "./pages/Tasks/Task";
 import TasksPage, { loader as tasksLoader } from "./pages/Tasks/Tasks";
 import NewTaskPage from "./pages/Tasks/New";
 import EditTaskPage from "./pages/Tasks/Edit";
@@ -36,12 +39,14 @@ const router = createBrowserRouter([
           {
             id: "task",
             path: ":taskID",
+            loader: taskLoader,
             children: [
-              { index: true, element: <p>Task ID</p> },
+              { index: true, element: <TaskPage /> },
               {
                 path: "edit-task",
                 element: <EditTaskPage />,
                 action: taskHttpAction,
+                loader: employeesLoader,
               },
             ],
           },
@@ -67,7 +72,7 @@ const router = createBrowserRouter([
             loader: employeeLoader,
 
             children: [
-              { index: true, element: <Employee /> },
+              { index: true, element: <EmployeePage /> },
               {
                 path: "edit-employee",
                 element: <EditEmployeePage />,
