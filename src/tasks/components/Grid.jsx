@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Grid, Stack, Typography, Box } from "@mui/material";
 import TaskCard from "./Card";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Pagination from "../../layout/Pagination";
+import Pagination from "../../globals/layout/Pagination";
 import TaskFilters from "./TaskFilters";
 
 const TaskGrid = ({

@@ -8,8 +8,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EuroIcon from "@mui/icons-material/Euro";
 import TaskIcon from "@mui/icons-material/Task";
 
-import VerticalStack from "../../layout/VerticalStack";
-import HorizontalStack from "../../layout/HorizontalStack";
+import VerticalStack from "../../globals/layout/VerticalStack";
+import HorizontalStack from "../../globals/layout/HorizontalStack";
 
 import { formatDate } from "../../functions/format-data";
 const Profile = ({ employee, deleteEmployeeHandler }) => {

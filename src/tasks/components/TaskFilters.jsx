@@ -6,7 +6,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import HorizontalStack from "../../layout/HorizontalStack";
+import HorizontalStack from "../../globals/layout/HorizontalStack";
 
 const sortOptions = [
   { value: "assignee", label: "Assignee" },

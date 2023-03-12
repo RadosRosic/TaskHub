@@ -18,7 +18,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 import EmployeeFilter from "./EmployeeFilter";
-import Pagination from "../../layout/Pagination";
+import Pagination from "../../globals/layout/Pagination";
 import {
   formatDate,
   shortenEmail,

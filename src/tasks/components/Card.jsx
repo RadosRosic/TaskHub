@@ -3,7 +3,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import HorizontalStack from "../../layout/HorizontalStack";
+import HorizontalStack from "../../globals/layout/HorizontalStack";
 
 import { formatDate } from "../../functions/format-data";
 

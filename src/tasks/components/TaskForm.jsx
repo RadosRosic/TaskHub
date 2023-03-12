@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import DatePicker from "../../globals/DatePicker";
-import FormWrapper from "../../layout/FormWrapper";
+import FormWrapper from "../../globals/layout/FormWrapper";
 
 const TaskForm = ({ method, task, options }) => {
   const navigation = useNavigation();
