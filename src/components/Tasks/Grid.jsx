@@ -22,7 +22,7 @@ const TaskGrid = ({ tasks, checkBoxHandler }) => {
         </Link>
         <FormControlLabel
           control={<Checkbox onChange={(e) => checkBoxHandler(e)} />}
-          label="Uncompleted only"
+          label="Hide completed"
         />
         <Grid container spacing={1} p={1}>
           {tasks.map((task) => (

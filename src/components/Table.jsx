@@ -21,37 +21,50 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
+
 import { formatDate, shortenEmail } from "../functions/format-data";
+import EmployeeFilter from "./EmployeeFilter";
+import Pagination from "./Pagination";
 
 const MyTable = ({
   bodyData,
-  setSortBy,
+  selectedYear,
+  setSelectedYear,
   setPage,
   page,
-  pageSize,
-  deleteEmployeeHandler,
-  lastPage,
+  selectedMonth,
+  setSelectedMonth,
+  setShowTopWorkers,
+  showTopWorkers,
 }) => {
+  const pageSize = 5;
   const from = (page - 1) * pageSize;
   const to = from + pageSize;
   const paginatedData = bodyData.slice(from, to);
+  const lastPage = Math.ceil(bodyData.length / pageSize);
 
   const matches960px = useMediaQuery("(min-width:960px)");
   const matches650px = useMediaQuery("(min-width:650px)");
-  const matches550px = useMediaQuery("(min-width:550px)");
   const matches475px = useMediaQuery("(min-width:475px)");
 
-  const nextPage = () => {
-    setPage((page) => page + 1);
-  };
-  const goToFirstPage = () => {
-    setPage(1);
-  };
-  const goToLastPage = () => {
-    setPage(lastPage);
-  };
-  const prevPage = () => {
-    setPage((page) => page - 1);
+  const getCompletedTasks = (employee) => {
+    let totalCompletedTasks = 0;
+
+    if (showTopWorkers) {
+      employee.completedTasks.forEach((task) => {
+        const taskDate = new Date(task.time);
+        if (
+          taskDate.getMonth() === selectedMonth &&
+          taskDate.getFullYear() === selectedYear
+        ) {
+          totalCompletedTasks++;
+        }
+      });
+    } else {
+      totalCompletedTasks = employee.completedTasks.length;
+    }
+
+    return totalCompletedTasks;
   };
 
   return (
@@ -62,6 +75,15 @@ const MyTable = ({
           <PersonAddIcon color="primary" />
         </Stack>
       </Link>
+
+      <EmployeeFilter
+        showTopWorkers={showTopWorkers}
+        setShowTopWorkers={setShowTopWorkers}
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        setSelectedMonth={setSelectedMonth}
+        setSelectedYear={setSelectedYear}
+      />
 
       <TableContainer component={Paper}>
         <Table aria-label="table">
@@ -81,7 +103,7 @@ const MyTable = ({
               <TableRow key={employee.id}>
                 <TableCell>
                   {`${employee.name} 
-                  ${employee.lastName}`}
+                  ${employee.lastName} (${getCompletedTasks(employee)})`}
                 </TableCell>
 
                 <TableCell>
@@ -117,27 +139,13 @@ const MyTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Paper
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      >
-        <IconButton onClick={goToFirstPage} disabled={page === 1}>
-          <FirstPageIcon />
-        </IconButton>
-        <IconButton onClick={prevPage} disabled={page === 1}>
-          <KeyboardArrowLeft />
-        </IconButton>
-        {page}
-        <IconButton onClick={nextPage} disabled={page === lastPage}>
-          <KeyboardArrowRight />
-        </IconButton>
-        <IconButton onClick={goToLastPage} disabled={page === lastPage}>
-          <LastPageIcon />
-        </IconButton>
-      </Paper>
+
+      <Pagination
+        page={page}
+        pageSize={pageSize}
+        lastPage={lastPage}
+        setPage={setPage}
+      />
     </Stack>
   );
 };

@@ -1,37 +1,62 @@
 import { useState } from "react";
-import { useRouteLoaderData, json, useNavigate } from "react-router-dom";
+import { useRouteLoaderData, json } from "react-router-dom";
 
 import Table from "../../components/Table";
 
 const Employees = () => {
   const data = [...useRouteLoaderData("employees")];
-  const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState("name");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(7);
-  const lastPage = Math.ceil(data.length / pageSize);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() - 1);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [showTopWorkers, setShowTopWorkers] = useState(false);
 
-  if (sortBy === "name") {
-    data.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (sortBy === "email") {
-    data.sort((a, b) => a.email.localeCompare(b.email));
-  } else if (sortBy === "salary") {
-    data.sort((a, b) => b.salary - a.salary);
-  } else if (sortBy === "task") {
-    data.sort((a, b) => a.task.localeCompare(b.task));
+  const sortEmployeesByCompletedTasks = (
+    employees,
+    selectedMonth,
+    selectedYear
+  ) => {
+    return employees.sort((employeeA, employeeB) => {
+      let completedTasksA = employeeA.completedTasks.filter((task) => {
+        let taskDate = new Date(task.time);
+        return (
+          taskDate.getMonth() === selectedMonth &&
+          taskDate.getFullYear() === selectedYear
+        );
+      }).length;
+
+      let completedTasksB = employeeB.completedTasks.filter((task) => {
+        let taskDate = new Date(task.time);
+        return (
+          taskDate.getMonth() === selectedMonth &&
+          taskDate.getFullYear() === selectedYear
+        );
+      }).length;
+
+      return completedTasksB - completedTasksA;
+    });
+  };
+
+  if (showTopWorkers) {
+    const test = sortEmployeesByCompletedTasks(
+      data,
+      selectedMonth,
+      selectedYear
+    );
+    console.log(test);
   }
 
   return (
-    <>
-      <Table
-        bodyData={data}
-        page={page}
-        setPage={setPage}
-        setSortBy={setSortBy}
-        pageSize={pageSize}
-        lastPage={lastPage}
-      />
-    </>
+    <Table
+      page={page}
+      setPage={setPage}
+      bodyData={data}
+      showTopWorkers={showTopWorkers}
+      setShowTopWorkers={setShowTopWorkers}
+      selectedMonth={selectedMonth}
+      selectedYear={selectedYear}
+      setSelectedMonth={setSelectedMonth}
+      setSelectedYear={setSelectedYear}
+    />
   );
 };
 
