@@ -19,7 +19,11 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 import EmployeeFilter from "./EmployeeFilter";
 import Pagination from "../../layout/Pagination";
-import { formatDate, shortenEmail } from "../../functions/format-data";
+import {
+  formatDate,
+  shortenEmail,
+  addDecimals,
+} from "../../functions/format-data";
 
 const MyTable = ({
   pageSize,
@@ -83,7 +87,7 @@ const MyTable = ({
               <TableCell>Name</TableCell>
               <TableCell width={150}>Tasks Done</TableCell>
               {matches960px && <TableCell>Phone</TableCell>}
-              {matches475px && <TableCell>Email</TableCell>}
+              {matches650px && <TableCell>Email</TableCell>}
               {matches475px && <TableCell>Salary</TableCell>}
               {matches960px && <TableCell>Birthday</TableCell>}
               <TableCell width={100}>Edit</TableCell>
@@ -105,7 +109,7 @@ const MyTable = ({
                     </Link>
                   </TableCell>
                 )}
-                {matches475px && (
+                {matches650px && (
                   <TableCell>
                     <Link to={`mailto:${employee.email}`}>
                       {matches960px
@@ -114,7 +118,9 @@ const MyTable = ({
                     </Link>
                   </TableCell>
                 )}
-                {matches475px && <TableCell>{employee.salary}€</TableCell>}
+                {matches475px && (
+                  <TableCell>{addDecimals(employee.salary)}€</TableCell>
+                )}
                 {matches960px && (
                   <TableCell>{formatDate(employee.dateOfBirth)}</TableCell>
                 )}

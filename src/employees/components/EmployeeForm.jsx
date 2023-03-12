@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Form, json, redirect } from "react-router-dom";
+import { Form, json, redirect, useNavigation } from "react-router-dom";
+
 import { TextField, Stack, Button, Typography } from "@mui/material";
-import DatePicker from "../../components/DatePicker";
-import FormWrapper from "../../layout/FormWrapper";
+
+import DatePicker from "../../globals/DatePicker";
+import FormWrapper from "../../globals/layout/FormWrapper";
 
 const EmployeeForm = ({ method, employee }) => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState(employee ? employee.name : "");
   const [lastName, setLastName] = useState(employee ? employee.name : "");
   const [email, setEmail] = useState(employee ? employee.email : "");
@@ -51,11 +55,6 @@ const EmployeeForm = ({ method, employee }) => {
     }
 
     setPhoneNumber(onlyNumsAndPlus);
-  };
-
-  const isValidEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
 
   return (
@@ -116,7 +115,11 @@ const EmployeeForm = ({ method, employee }) => {
             />
           )}
 
-          <Button variant="contained" type="submit" disabled={!allEntered}>
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={!allEntered || navigation.state === "submitting"}
+          >
             Submit
           </Button>
         </Stack>

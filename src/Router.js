@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePage from "./pages/Home";
-import Root from "./pages/Root";
-import ErrorPage from "./pages/Error";
+import HomePage from "./globals/pages/Home";
+import Root from "./globals/pages/Root";
+import ErrorPage from "./globals/pages/Error";
 
 import EmployeesPage, {
   loader as employeesLoader,

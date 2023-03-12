@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, json, redirect } from "react-router-dom";
+import { Form, json, redirect, useNavigation } from "react-router-dom";
 import {
   TextField,
   Stack,
@@ -8,10 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 
-import DatePicker from "../../components/DatePicker";
+import DatePicker from "../../globals/DatePicker";
 import FormWrapper from "../../layout/FormWrapper";
 
 const TaskForm = ({ method, task, options }) => {
+  const navigation = useNavigation();
   const [title, setTitle] = useState(task ? task.title : "");
   const [dueDate, setDueDate] = useState(null);
   const [assigneeID, setAssigneeID] = useState("");
@@ -19,7 +20,7 @@ const TaskForm = ({ method, task, options }) => {
 
   const [description, setDescription] = useState(task ? task.description : "");
 
-  const allSelected = title && assignee && dueDate && description;
+  const allEntered = title && assignee && dueDate && description;
 
   const handleAssigneeChange = (e, newValue) => {
     if (newValue) {
@@ -100,7 +101,11 @@ const TaskForm = ({ method, task, options }) => {
             onChange={(e) => handleDescriptionChange(e)}
           />
 
-          <Button variant="contained" type="submit" disabled={!allSelected}>
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={!allEntered || navigation.state === "submitting"}
+          >
             Submit
           </Button>
         </Stack>

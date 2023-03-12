@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Orbitron";
+  src: local("Orbitron-Regular"),
+    url("../Orbitron-VariableFont_wght.ttf") format("truetype");
+}
+
+.active {
+  color: gold;
+}
+
+.main-title {
+  font-family: "Orbitron", Courier, monospace;
+}

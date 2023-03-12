@@ -7,6 +7,7 @@ import {
   Stack,
   Button,
 } from "@mui/material";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 
 const currentYear = new Date().getFullYear();
 const currentMonth = new Date().getMonth();
@@ -98,7 +99,9 @@ const EmployeeFilter = ({
       )}
       {showTopWorkers && <Button onClick={handleHideDropdown}>Hide</Button>}
       {!showTopWorkers && (
-        <Button onClick={handleShowDropdown}>Show Top Workers</Button>
+        <Button onClick={handleShowDropdown} endIcon={<LeaderboardIcon />}>
+          Show Top Workers
+        </Button>
       )}
     </Stack>
   );
