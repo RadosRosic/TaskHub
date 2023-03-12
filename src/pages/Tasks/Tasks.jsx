@@ -1,10 +1,30 @@
+import { useState } from "react";
 import { useLoaderData, json } from "react-router-dom";
 import TaskGrid from "../../components/Tasks/Grid";
 
 const Tasks = () => {
-  const data = useLoaderData();
+  let data = [...useLoaderData()];
+  const [uncompletedOnly, setUncompletedOnly] = useState(false);
 
-  return <TaskGrid tasks={data} />;
+  if (uncompletedOnly) {
+    data = data.filter((task) => !task.completed);
+  }
+
+  const checkBoxHandler = (e) => {
+    if (e.target.checked) {
+      setUncompletedOnly(true);
+    } else {
+      setUncompletedOnly(false);
+    }
+  };
+
+  return (
+    <TaskGrid
+      tasks={data}
+      uncompletedOnly={uncompletedOnly}
+      checkBoxHandler={checkBoxHandler}
+    />
+  );
 };
 
 export default Tasks;

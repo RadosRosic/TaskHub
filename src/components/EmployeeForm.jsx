@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, json, redirect } from "react-router-dom";
 import { TextField, Stack, Button, Typography } from "@mui/material";
 import DatePicker from "./DatePicker";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "./Layout/FormWrapper";
 
 const EmployeeForm = ({ method, employee }) => {
   const [name, setName] = useState(employee ? employee.name : "");
@@ -16,8 +16,10 @@ const EmployeeForm = ({ method, employee }) => {
 
   const formTitle = method === "POST" ? "Create employee" : "Edit employee";
 
-  const allEntered =
-    name && lastName && email && phoneNumber && salary && birthdate;
+  let allEntered = name && lastName && email && phoneNumber && salary;
+  if (method === "POST") {
+    allEntered = allEntered && birthdate;
+  }
 
   const handleNameChange = (e, stateDispatch) => {
     let name = e.target.value.replace(/[^a-zA-Z\s]/g, "");
@@ -38,6 +40,7 @@ const EmployeeForm = ({ method, employee }) => {
     const onlyNums = e.target.value.replace(/[^0-9.,]/g, "");
     const fixedDecimals = onlyNums.replace(/,/g, ".");
     const noExtraDecimals = fixedDecimals.replace(/(\..*)\./g, "$1");
+
     setSalary(noExtraDecimals);
   };
 

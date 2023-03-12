@@ -4,7 +4,9 @@ import HomePage from "./pages/Home";
 import Root from "./pages/Root";
 import ErrorPage from "./pages/Error";
 
-import EmployeesPage, { loader as employeesLoader } from "./pages/Employees";
+import EmployeesPage, {
+  loader as employeesLoader,
+} from "./pages/Employees/Employees";
 import EmployeePage, {
   loader as employeeLoader,
 } from "./pages/Employees/Employee";
@@ -43,6 +45,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <TaskPage /> },
               {
+                id: "edit-task",
                 path: "edit-task",
                 element: <EditTaskPage />,
                 action: taskHttpAction,

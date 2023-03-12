@@ -6,13 +6,16 @@ const EditTask = () => {
   const task = useRouteLoaderData("task");
   const options = data?.map((employee) => {
     return {
-      employeeID: employee.id,
       label: `${employee.lastName} ${employee.name}`,
+      value: {
+        name: `${employee.lastName} ${employee.name}`,
+        employeeID: employee.id,
+      },
     };
   });
   options?.sort((a, b) => a.label.localeCompare(b.label));
 
-  console.log(options);
+  console.log(options.map((e) => e.employeeID));
   return <TaskForm method="PUT" task={task} options={options} />;
 };
 

@@ -9,15 +9,30 @@ import {
 } from "@mui/material";
 
 import DatePicker from "./DatePicker";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "./Layout/FormWrapper";
 
 const TaskForm = ({ method, task, options }) => {
   const [title, setTitle] = useState(task ? task.title : "");
-  const [assignee, setAssignee] = useState(task ? task.assignee : "");
   const [dueDate, setDueDate] = useState(null);
+  const [assigneeID, setAssigneeID] = useState("");
+  const [assignee, setAssignee] = useState("");
+
+  const [description, setDescription] = useState(task ? task.description : "");
+
+  const allSelected = title && assignee && dueDate && description;
+
+  const handleAssigneeChange = (_, newValue) => {
+    console.log(newValue);
+    setAssigneeID(newValue.value.employeeID);
+    setAssignee(newValue.value.name);
+  };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
   const formTitle = method === "POST" ? "Create task" : "Edit task";
@@ -37,34 +52,38 @@ const TaskForm = ({ method, task, options }) => {
             onChange={(e) => handleTitleChange(e)}
             variant="standard"
           />
-
-          <Autocomplete
-            options={options}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Assignee"
-                name="assignee"
-                required
-                variant="standard"
-              />
-            )}
-          />
-          {method === "PUT" && (
-            <TextField
-              label="Completed"
-              variant="standard"
-              name="completed"
-              required
-              defaultValue={task ? task.completed : ""}
+          <Stack direction="row" justifyContent="space-between">
+            <Autocomplete
+              sx={{ width: "75%" }}
+              options={options}
+              inputValue={assignee}
+              onChange={handleAssigneeChange}
+              isOptionEqualToValue={(option, value) => option !== value}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Assignee"
+                  name="assignee"
+                  required
+                  variant="standard"
+                />
+              )}
             />
-          )}
+            <TextField
+              label="ID"
+              name="assigneeID"
+              sx={{ width: "20%" }}
+              value={assigneeID}
+              variant="standard"
+              InputProps={{ readOnly: true }}
+            />
+          </Stack>
           <DatePicker
-            name="dueDate"
-            disablePast={true}
             label="Due Date *"
+            name="dueDate"
             value={dueDate}
             setDate={setDueDate}
+            disablePast={true}
           />
           <TextField
             label="Description"
@@ -73,9 +92,11 @@ const TaskForm = ({ method, task, options }) => {
             rows={6}
             required
             variant="outlined"
-            defaultValue={task ? task.description : ""}
+            value={description}
+            onChange={(e) => handleDescriptionChange(e)}
           />
-          <Button variant="contained" type="submit">
+
+          <Button variant="contained" type="submit" disabled={!allSelected}>
             Submit
           </Button>
         </Stack>
@@ -90,6 +111,9 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
   const newTaskData = Object.fromEntries(data);
+  newTaskData.completed === "true"
+    ? (newTaskData.completed = true)
+    : (newTaskData.completed = false);
 
   let url = "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/tasks";
 
@@ -111,6 +135,9 @@ export async function action({ request, params }) {
   }
   if (!response.ok && method === "POST") {
     throw json({ message: "Could not create new task" }, { status: 500 });
+  }
+
+  if (newTaskData.completed) {
   }
 
   return redirect("/tasks");

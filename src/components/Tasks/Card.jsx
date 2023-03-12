@@ -1,31 +1,50 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Button,
-  Typography,
-} from "@mui/material";
+import { Link } from "react-router-dom";
+import { Card, CardContent, Typography } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import HorizontalStack from "../Layout/HorizontalStack";
 
-import { formatDate, shortenText } from "../../functions/format-data";
+import { formatDate } from "../../functions/format-data";
 
 const TaskCard = ({ task }) => {
+  const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
+  const taskDate = new Date(task.dueDate).getTime();
+  const now = Date.now();
+  let bgColor;
+  if (task.completed) {
+    bgColor = "forestgreen";
+  } else if (taskDate < now) {
+    bgColor = "red";
+  } else if (taskDate - now < MILLISECONDS_IN_DAY) {
+    bgColor = "maroon";
+  } else if (taskDate - now < MILLISECONDS_IN_DAY * 7) {
+    bgColor = "orange";
+  } else if (taskDate - now > MILLISECONDS_IN_DAY * 14) {
+    bgColor = "unset";
+  }
+  console.log(taskDate, now);
+
   return (
-    <Card>
+    <Card sx={{ backgroundColor: bgColor }}>
       <CardContent>
-        <Typography variant="h6" component="h3">
-          {task.assignee}
-        </Typography>
-        <Typography variant="h6" component="h3">
-          {task.title}
-        </Typography>
-        <Typography variant="subtitle2">{formatDate(task.dueDate)}</Typography>
-        <Typography variant="body2">{shortenText(task.description)}</Typography>
-        <Typography>{task.completed}</Typography>
-        {/* <Typography>{task.assignee}</Typography> */}
+        <Link to={task.id}>
+          <HorizontalStack>
+            <Typography component="h3">{task.assignee}</Typography>
+            <PersonIcon />
+          </HorizontalStack>
+          <HorizontalStack>
+            <Typography component="h3">{task.title}</Typography>
+            <AssignmentIcon />
+          </HorizontalStack>
+          <HorizontalStack>
+            <Typography variant="subtitle2">
+              {formatDate(task.dueDate)}
+            </Typography>
+            <CalendarMonthIcon />
+          </HorizontalStack>
+        </Link>
       </CardContent>
-      <CardActions>
-        <Button>More info</Button>
-      </CardActions>
     </Card>
   );
 };
