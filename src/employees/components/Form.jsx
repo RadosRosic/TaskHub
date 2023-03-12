@@ -3,7 +3,7 @@ import { Form, json, redirect, useNavigation } from "react-router-dom";
 
 import { TextField, Stack, Button, Typography } from "@mui/material";
 
-import DatePicker from "../../globals/DatePicker";
+import DatePicker from "../../globals/components/DatePicker";
 import FormWrapper from "../../globals/layout/FormWrapper";
 
 const EmployeeForm = ({ method, employee }) => {

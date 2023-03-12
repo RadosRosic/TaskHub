@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import { Typography } from "@mui/material";
-import Header from "../Header";
+import Header from "../components/Header";
 
 const ErrorPage = () => {
   const error = useRouteError();

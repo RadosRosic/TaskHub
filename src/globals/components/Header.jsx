@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { AppBar, Toolbar, Box } from "@mui/material";
-import HorizontalStack from "./layout/HorizontalStack";
-import HamburgerMenu from "./HamburgerMenu";
+import HorizontalStack from "../layout/HorizontalStack";
+import HamburgerMenu from "../components/HamburgerMenu";
 
 import classes from "./Header.module.css";
 

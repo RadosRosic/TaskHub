@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import DatePicker from "../../globals/DatePicker";
+import DatePicker from "../../globals/components/DatePicker";
 import FormWrapper from "../../globals/layout/FormWrapper";
 
 const TaskForm = ({ method, task, options }) => {
