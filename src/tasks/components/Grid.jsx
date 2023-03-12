@@ -13,6 +13,8 @@ const TaskGrid = ({
   setPage,
   sortBy,
   handleSortChange,
+  disableColors,
+  handleColors,
 }) => {
   return (
     <>
@@ -26,6 +28,7 @@ const TaskGrid = ({
           </Link>
 
           <TaskFilters
+            handleColors={handleColors}
             sortBy={sortBy}
             handleSortChange={handleSortChange}
             checkBoxHandler={checkBoxHandler}
@@ -33,7 +36,7 @@ const TaskGrid = ({
           <Grid container spacing={1} p={1}>
             {tasks.map((task) => (
               <Grid key={task.id} item xs={12} sm={6} md={4} lg={3}>
-                {<TaskCard task={task} />}
+                {<TaskCard task={task} disableColors={disableColors} />}
               </Grid>
             ))}
           </Grid>

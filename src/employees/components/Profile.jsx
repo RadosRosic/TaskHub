@@ -1,41 +1,17 @@
-import { json, useNavigate } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import { Typography, Button } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import CakeIcon from "@mui/icons-material/Cake";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EuroIcon from "@mui/icons-material/Euro";
+import TaskIcon from "@mui/icons-material/Task";
 
 import VerticalStack from "../../layout/VerticalStack";
 import HorizontalStack from "../../layout/HorizontalStack";
 
 import { formatDate } from "../../functions/format-data";
-const Profile = ({ employee }) => {
-  const navigate = useNavigate();
-  const deleteEmployeeHandler = async (id) => {
-    const confirm = window.confirm("Are you sure?");
-
-    if (confirm) {
-      const response = await fetch(
-        "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/employees/" + id,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw json(
-          { message: "Could not delete employee" },
-          {
-            status: 500,
-          }
-        );
-      }
-      navigate("..");
-      navigate(0);
-    }
-  };
-
+const Profile = ({ employee, deleteEmployeeHandler }) => {
   return (
     <VerticalStack>
       <HorizontalStack>
@@ -47,19 +23,29 @@ const Profile = ({ employee }) => {
       <HorizontalStack>
         <Typography>{formatDate(employee.dateOfBirth)}</Typography> <CakeIcon />
       </HorizontalStack>
-      <HorizontalStack>
-        <Typography>{employee.email}</Typography>
-        <EmailIcon />
-      </HorizontalStack>
-
-      <HorizontalStack>
-        <Typography>{employee.phoneNumber}</Typography>
-        <PhoneIcon />
-      </HorizontalStack>
+      <Link to={`mailto:${employee.email}`}>
+        <HorizontalStack>
+          <Typography>{employee.email}</Typography>
+          <EmailIcon />
+        </HorizontalStack>
+      </Link>
+      <Link to={`tel:${employee.phoneNumber}`}>
+        <HorizontalStack>
+          <Typography>{employee.phoneNumber}</Typography>
+          <PhoneIcon />
+        </HorizontalStack>
+      </Link>
       <HorizontalStack>
         <Typography>{employee.salary}</Typography>
         <EuroIcon />
       </HorizontalStack>
+      <HorizontalStack>
+        <Typography>{employee.completedTasks.length}</Typography>
+        <TaskIcon />
+      </HorizontalStack>
+      <Typography color="primary" textAlign="center">
+        <Link to={"edit-employee"}>EDIT</Link>
+      </Typography>
       <Button
         color="error"
         onClick={deleteEmployeeHandler.bind(null, employee.id)}

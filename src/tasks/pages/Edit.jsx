@@ -15,7 +15,6 @@ const EditTask = () => {
   });
   options?.sort((a, b) => a.label.localeCompare(b.label));
 
-  console.log(options.map((e) => e.employeeID));
   return <TaskForm method="PUT" task={task} options={options} />;
 };
 

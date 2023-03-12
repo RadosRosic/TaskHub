@@ -81,12 +81,13 @@ const MyTable = ({
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              {matches650px && <TableCell>Phone</TableCell>}
+              <TableCell width={150}>Tasks Done</TableCell>
+              {matches960px && <TableCell>Phone</TableCell>}
+              {matches475px && <TableCell>Email</TableCell>}
               {matches475px && <TableCell>Salary</TableCell>}
               {matches960px && <TableCell>Birthday</TableCell>}
-              <TableCell>Edit</TableCell>
-              <TableCell>View</TableCell>
+              <TableCell width={100}>Edit</TableCell>
+              <TableCell width={100}>View</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -94,20 +95,22 @@ const MyTable = ({
               <TableRow key={employee.id}>
                 <TableCell>
                   {`${employee.name} 
-                  ${employee.lastName} (${getCompletedTasks(employee)})`}
+                  ${employee.lastName}`}
                 </TableCell>
-
-                <TableCell>
-                  <Link to={`mailto:${employee.email}`}>
-                    {matches650px
-                      ? employee.email
-                      : shortenEmail(employee.email)}
-                  </Link>
-                </TableCell>
-                {matches650px && (
+                <TableCell>{`${getCompletedTasks(employee)}`}</TableCell>
+                {matches960px && (
                   <TableCell>
                     <Link to={`tel:${employee.phoneNumber}`}>
                       {employee.phoneNumber}
+                    </Link>
+                  </TableCell>
+                )}
+                {matches475px && (
+                  <TableCell>
+                    <Link to={`mailto:${employee.email}`}>
+                      {matches960px
+                        ? employee.email
+                        : shortenEmail(employee.email)}
                     </Link>
                   </TableCell>
                 )}

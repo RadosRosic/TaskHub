@@ -10,8 +10,8 @@ const Employees = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [showTopWorkers, setShowTopWorkers] = useState(false);
 
-  const sortByCompletedTasks = (employees) => {
-    employees.sort((a, b) => {
+  const sortByCompletedTasks = () => {
+    data.sort((a, b) => {
       return (
         b.completedTasks.filter((task) => {
           return (
@@ -29,8 +29,14 @@ const Employees = () => {
     });
   };
 
+  const sortByName = () => {
+    data.sort((a, b) => a.name.localeCompare(b.name));
+  };
+
   if (showTopWorkers) {
-    console.log(sortByCompletedTasks(data, selectedMonth, selectedYear));
+    sortByCompletedTasks();
+  } else {
+    sortByName();
   }
 
   const pageSize = 5;

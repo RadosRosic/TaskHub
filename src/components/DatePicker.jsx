@@ -24,6 +24,7 @@ const DatePicker = ({
         type="text"
         value={value?._d}
         name={name}
+        defaultValue={value?._d}
         style={{ display: "none" }}
       />
     </>

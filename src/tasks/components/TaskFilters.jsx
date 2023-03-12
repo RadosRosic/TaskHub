@@ -13,7 +13,12 @@ const sortOptions = [
   { value: "dueDate", label: "Due Date" },
 ];
 
-const TaskFilters = ({ sortBy, handleSortChange, checkBoxHandler }) => {
+const TaskFilters = ({
+  sortBy,
+  handleSortChange,
+  checkBoxHandler,
+  handleColors,
+}) => {
   return (
     <HorizontalStack>
       <FormControl>
@@ -35,6 +40,10 @@ const TaskFilters = ({ sortBy, handleSortChange, checkBoxHandler }) => {
       <FormControlLabel
         control={<Checkbox size="small" onChange={(e) => checkBoxHandler(e)} />}
         label="Hide completed"
+      />
+      <FormControlLabel
+        control={<Checkbox size="small" onChange={(e) => handleColors(e)} />}
+        label="Disable colors"
       />
     </HorizontalStack>
   );

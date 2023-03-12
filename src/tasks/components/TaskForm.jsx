@@ -21,9 +21,13 @@ const TaskForm = ({ method, task, options }) => {
 
   const allSelected = title && assignee && dueDate && description;
 
-  const handleAssigneeChange = (_, newValue) => {
-    setAssigneeID(newValue.value.employeeID);
-    setAssignee(newValue.value.name);
+  const handleAssigneeChange = (e, newValue) => {
+    if (newValue) {
+      setAssigneeID(newValue.value.employeeID);
+      setAssignee(newValue.value.name);
+    } else {
+      setAssignee(e.target.value);
+    }
   };
 
   const handleTitleChange = (e) => {
@@ -54,8 +58,9 @@ const TaskForm = ({ method, task, options }) => {
           <Stack direction="row" justifyContent="space-between">
             <Autocomplete
               sx={{ width: "75%" }}
+              disableClearable
               options={options}
-              inputValue={assignee}
+              value={assignee}
               onChange={handleAssigneeChange}
               isOptionEqualToValue={(option, value) => option !== value}
               renderInput={(params) => (

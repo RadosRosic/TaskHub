@@ -57,8 +57,6 @@ const EmployeeFilter = ({
   const selectableMonths =
     selectedYear === currentYear ? months.slice(0, currentMonth + 1) : months;
 
-  const buttonText = showTopWorkers ? "Hide" : "Top Workers";
-
   return (
     <Stack direction="row" spacing={2}>
       {showTopWorkers && (
@@ -98,8 +96,10 @@ const EmployeeFilter = ({
           </FormControl>
         </>
       )}
-      <Button onClick={handleHideDropdown}>{buttonText}</Button>
-      <Button onClick={handleShowDropdown}>{buttonText}</Button>
+      {showTopWorkers && <Button onClick={handleHideDropdown}>Hide</Button>}
+      {!showTopWorkers && (
+        <Button onClick={handleShowDropdown}>Show Top Workers</Button>
+      )}
     </Stack>
   );
 };

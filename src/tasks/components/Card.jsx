@@ -7,12 +7,14 @@ import HorizontalStack from "../../layout/HorizontalStack";
 
 import { formatDate } from "../../functions/format-data";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, disableColors }) => {
   const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
   const taskDate = new Date(task.dueDate).getTime();
   const now = Date.now();
   let bgColor;
-  if (task.completed) {
+  if (disableColors) {
+    bgColor = "unset";
+  } else if (task.completed) {
     bgColor = "forestgreen";
   } else if (taskDate < now) {
     bgColor = "red";

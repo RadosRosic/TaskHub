@@ -26,7 +26,7 @@ const EmployeeForm = ({ method, employee }) => {
     name = name.replace(/^\s+/, "");
     let words = name.split(/\s+/);
     words = words.map(
-      (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      (word) => word.charAt(0).toUpperCase() + word.slice(1)?.toLowerCase()
     );
     name = words.join(" ");
     stateDispatch(name);

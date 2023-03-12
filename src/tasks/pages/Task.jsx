@@ -1,17 +1,15 @@
-import { json, Link, useRouteLoaderData, redirect } from "react-router-dom";
-import { Button, Typography } from "@mui/material";
+import {
+  json,
+  useRouteLoaderData,
+  redirect,
+  useNavigate,
+} from "react-router-dom";
 
-import PersonIcon from "@mui/icons-material/Person";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-
-import VerticalStack from "../../layout/VerticalStack";
-import HorizontalStack from "../../layout/HorizontalStack";
-
-import { formatDate } from "../../functions/format-data";
+import CardBig from "../components/CardBig";
 
 const Task = () => {
   const data = useRouteLoaderData("task");
+  const navigate = useNavigate();
 
   const markComplete = async () => {
     const url = "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/";
@@ -58,26 +56,35 @@ const Task = () => {
     }
     redirect("/tasks");
   };
+
+  const deleteTaskHandler = async (id) => {
+    const confirm = window.confirm("Are you sure?");
+
+    if (confirm) {
+      const response = await fetch(
+        "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/tasks/" + id,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw json(
+          { message: "Could not delete task" },
+          {
+            status: 500,
+          }
+        );
+      }
+      navigate("/tasks");
+    }
+  };
+
   return (
-    <VerticalStack>
-      <HorizontalStack>
-        <Typography>{data.assignee}</Typography>
-        <PersonIcon />
-      </HorizontalStack>
-      <HorizontalStack>
-        <Typography>{data.title}</Typography>
-        <AssignmentIcon />
-      </HorizontalStack>
-      <HorizontalStack>
-        <Typography variant="subtitle2">{formatDate(data.dueDate)}</Typography>
-        <CalendarMonthIcon />
-      </HorizontalStack>
-      <Typography variant="body2">{data.description}</Typography>
-      <Typography variant="body2" color="primary" textAlign="center">
-        <Link to="edit-task">EDIT</Link>
-      </Typography>
-      <Button onClick={markComplete}>Mark as done</Button>
-    </VerticalStack>
+    <CardBig
+      data={data}
+      markComplete={markComplete}
+      deleteTaskHandler={deleteTaskHandler}
+    />
   );
 };
 
