@@ -5,6 +5,7 @@ import TaskGrid from "../../components/Tasks/Grid";
 const Tasks = () => {
   let data = [...useLoaderData()];
   const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState("name");
   const [uncompletedOnly, setUncompletedOnly] = useState(false);
 
   if (uncompletedOnly) {
@@ -17,6 +18,10 @@ const Tasks = () => {
   const paginatedData = data.slice(from, to);
   const lastPage = Math.ceil(data.length / pageSize);
 
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
   const checkBoxHandler = (e) => {
     if (e.target.checked) {
       setUncompletedOnly(true);
@@ -24,6 +29,12 @@ const Tasks = () => {
       setUncompletedOnly(false);
     }
   };
+
+  if (sortBy === "dueDate") {
+    paginatedData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  } else {
+    paginatedData.sort((a, b) => a.assignee.localeCompare(b.assignee));
+  }
 
   return (
     <TaskGrid
@@ -33,6 +44,8 @@ const Tasks = () => {
       page={page}
       lastPage={lastPage}
       setPage={setPage}
+      sortBy={sortBy}
+      handleSortChange={handleSortChange}
     />
   );
 };

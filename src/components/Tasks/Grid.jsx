@@ -6,12 +6,24 @@ import {
   Box,
   FormControlLabel,
   Checkbox,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl,
 } from "@mui/material";
 import TaskCard from "./Card";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Pagination from "../Pagination";
 
-const TaskGrid = ({ tasks, checkBoxHandler, page, lastPage, setPage }) => {
+const TaskGrid = ({
+  tasks,
+  checkBoxHandler,
+  page,
+  lastPage,
+  setPage,
+  sortBy,
+  handleSortChange,
+}) => {
   return (
     <>
       <Box sx={{ width: "80%", m: "auto" }}>
@@ -22,6 +34,7 @@ const TaskGrid = ({ tasks, checkBoxHandler, page, lastPage, setPage }) => {
               <AddCircleIcon color="primary" />
             </Stack>
           </Link>
+
           <FormControlLabel
             control={
               <Checkbox size="small" onChange={(e) => checkBoxHandler(e)} />
