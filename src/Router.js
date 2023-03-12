@@ -6,20 +6,20 @@ import ErrorPage from "./pages/Error";
 
 import EmployeesPage, {
   loader as employeesLoader,
-} from "./pages/Employees/Employees";
+} from "./employees/pages/Employees";
 import EmployeePage, {
   loader as employeeLoader,
-} from "./pages/Employees/Employee";
-import NewEmployeePage from "./pages/Employees/New";
-import EditEmployeePage from "./pages/Employees/Edit";
+} from "./employees/pages/Employee";
+import NewEmployeePage from "./employees/pages/New";
+import EditEmployeePage from "./employees/pages/Edit";
 
-import TaskPage, { loader as taskLoader } from "./pages/Tasks/Task";
-import TasksPage, { loader as tasksLoader } from "./pages/Tasks/Tasks";
-import NewTaskPage from "./pages/Tasks/New";
-import EditTaskPage from "./pages/Tasks/Edit";
+import TaskPage, { loader as taskLoader } from "./tasks/pages/Task";
+import TasksPage, { loader as tasksLoader } from "./tasks/pages/Tasks";
+import NewTaskPage from "./tasks/pages/New";
+import EditTaskPage from "./tasks/pages/Edit";
 
-import { action as taskHttpAction } from "./components/TaskForm";
-import { action as employeeHttpAction } from "./components/EmployeeForm";
+import { action as taskHttpAction } from "./tasks/components/TaskForm";
+import { action as employeeHttpAction } from "./employees/components/EmployeeForm";
 
 const router = createBrowserRouter([
   {
