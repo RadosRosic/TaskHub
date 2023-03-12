@@ -54,7 +54,7 @@ const Task = () => {
         }
       );
     }
-    redirect("/tasks");
+    navigate("/tasks");
   };
 
   const deleteTaskHandler = async (id) => {
@@ -75,8 +75,8 @@ const Task = () => {
           }
         );
       }
-      navigate("/tasks");
     }
+    navigate("/tasks");
   };
 
   return (
