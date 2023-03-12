@@ -27,7 +27,9 @@ import EmployeeFilter from "./EmployeeFilter";
 import Pagination from "./Pagination";
 
 const MyTable = ({
-  bodyData,
+  pageSize,
+  lastPage,
+  paginatedData,
   selectedYear,
   setSelectedYear,
   setPage,
@@ -37,12 +39,6 @@ const MyTable = ({
   setShowTopWorkers,
   showTopWorkers,
 }) => {
-  const pageSize = 5;
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize;
-  const paginatedData = bodyData.slice(from, to);
-  const lastPage = Math.ceil(bodyData.length / pageSize);
-
   const matches960px = useMediaQuery("(min-width:960px)");
   const matches650px = useMediaQuery("(min-width:650px)");
   const matches475px = useMediaQuery("(min-width:475px)");

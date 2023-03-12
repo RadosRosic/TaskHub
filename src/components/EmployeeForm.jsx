@@ -131,7 +131,6 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
   const newEmployeeData = Object.fromEntries(data);
-  console.log(newEmployeeData);
 
   let url = "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/employees";
 

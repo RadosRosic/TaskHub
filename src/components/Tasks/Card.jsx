@@ -23,7 +23,6 @@ const TaskCard = ({ task }) => {
   } else if (taskDate - now > MILLISECONDS_IN_DAY * 14) {
     bgColor = "unset";
   }
-  console.log(taskDate, now);
 
   return (
     <Card sx={{ backgroundColor: bgColor }}>

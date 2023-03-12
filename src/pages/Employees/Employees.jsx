@@ -10,6 +10,12 @@ const Employees = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [showTopWorkers, setShowTopWorkers] = useState(false);
 
+  const pageSize = 5;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize;
+  const paginatedData = data.slice(from, to);
+  const lastPage = Math.ceil(data.length / pageSize);
+
   const sortEmployeesByCompletedTasks = (
     employees,
     selectedMonth,
@@ -37,19 +43,16 @@ const Employees = () => {
   };
 
   if (showTopWorkers) {
-    const test = sortEmployeesByCompletedTasks(
-      data,
-      selectedMonth,
-      selectedYear
-    );
-    console.log(test);
+    sortEmployeesByCompletedTasks(data, selectedMonth, selectedYear);
   }
 
   return (
     <Table
       page={page}
+      pageSize={pageSize}
+      lastPage={lastPage}
       setPage={setPage}
-      bodyData={data}
+      paginatedData={paginatedData}
       showTopWorkers={showTopWorkers}
       setShowTopWorkers={setShowTopWorkers}
       selectedMonth={selectedMonth}

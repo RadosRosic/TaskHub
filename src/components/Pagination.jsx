@@ -4,25 +4,25 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 
-const Pagination = ({ page, lastPage, setPage }) => {
-  const nextPage = () => {
-    setPage((page) => page + 1);
-  };
+const Pagination = ({ page, lastPage, setPage, location = "flex-end" }) => {
   const goToFirstPage = () => {
     setPage(1);
   };
-  const goToLastPage = () => {
-    setPage(lastPage);
-  };
   const prevPage = () => {
     setPage((page) => page - 1);
+  };
+  const nextPage = () => {
+    setPage((page) => page + 1);
+  };
+  const goToLastPage = () => {
+    setPage(lastPage);
   };
 
   return (
     <Paper
       sx={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: location,
         alignItems: "center",
       }}
     >

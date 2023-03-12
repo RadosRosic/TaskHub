@@ -12,7 +12,6 @@ import { formatDate } from "../../functions/format-data";
 
 const Task = () => {
   const data = useRouteLoaderData("task");
-  console.log(data);
 
   const markComplete = async () => {
     const url = "https://6409c70ed16b1f3ed6dc8caf.mockapi.io/taskhub/";
@@ -27,7 +26,6 @@ const Task = () => {
       );
     }
     const employeeData = await employeeRes.json();
-    console.log(employeeRes);
 
     const employeeResPut = await fetch(url + "employees/" + data.assigneeID, {
       method: "PUT",

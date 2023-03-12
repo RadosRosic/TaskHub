@@ -28,7 +28,7 @@ const months = [
 
 const years = [];
 for (let year = currentYear; year >= currentYear - 10; year--) {
-  years.push({ value: year, label: year.toString() });
+  years.push({ value: year, label: year });
 }
 
 const EmployeeFilter = ({

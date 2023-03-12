@@ -4,11 +4,18 @@ import TaskGrid from "../../components/Tasks/Grid";
 
 const Tasks = () => {
   let data = [...useLoaderData()];
+  const [page, setPage] = useState(1);
   const [uncompletedOnly, setUncompletedOnly] = useState(false);
 
   if (uncompletedOnly) {
     data = data.filter((task) => !task.completed);
   }
+
+  const pageSize = 12;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize;
+  const paginatedData = data.slice(from, to);
+  const lastPage = Math.ceil(data.length / pageSize);
 
   const checkBoxHandler = (e) => {
     if (e.target.checked) {
@@ -20,9 +27,12 @@ const Tasks = () => {
 
   return (
     <TaskGrid
-      tasks={data}
+      tasks={paginatedData}
       uncompletedOnly={uncompletedOnly}
       checkBoxHandler={checkBoxHandler}
+      page={page}
+      lastPage={lastPage}
+      setPage={setPage}
     />
   );
 };

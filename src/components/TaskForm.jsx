@@ -22,7 +22,6 @@ const TaskForm = ({ method, task, options }) => {
   const allSelected = title && assignee && dueDate && description;
 
   const handleAssigneeChange = (_, newValue) => {
-    console.log(newValue);
     setAssigneeID(newValue.value.employeeID);
     setAssignee(newValue.value.name);
   };
