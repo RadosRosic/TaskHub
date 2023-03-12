@@ -18,8 +18,8 @@ import TasksPage, { loader as tasksLoader } from "./tasks/pages/Tasks";
 import NewTaskPage from "./tasks/pages/New";
 import EditTaskPage from "./tasks/pages/Edit";
 
-import { action as taskHttpAction } from "./tasks/components/TaskForm";
-import { action as employeeHttpAction } from "./employees/components/EmployeeForm";
+import { action as taskHttpAction } from "./tasks/components/Form";
+import { action as employeeHttpAction } from "./employees/components/Form";
 
 const router = createBrowserRouter([
   {

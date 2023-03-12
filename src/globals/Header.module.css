@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Orbitron";
   src: local("Orbitron-Regular"),
-    url("../Orbitron-VariableFont_wght.ttf") format("truetype");
+    url("./Orbitron-VariableFont_wght.ttf") format("truetype");
 }
 
 .active {

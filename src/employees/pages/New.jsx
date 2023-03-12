@@ -1,4 +1,4 @@
-import EmployeeForm from "../components/EmployeeForm";
+import EmployeeForm from "../components/Form";
 
 const NewEmployee = () => {
   return <EmployeeForm method="POST" />;

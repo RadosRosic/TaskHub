@@ -1,4 +1,4 @@
-import EmployeeForm from "../components/EmployeeForm";
+import EmployeeForm from "../components/Form";
 import { useRouteLoaderData } from "react-router-dom";
 
 const EditEmployee = () => {

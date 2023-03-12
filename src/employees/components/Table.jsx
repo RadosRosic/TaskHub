@@ -17,7 +17,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
-import EmployeeFilter from "./EmployeeFilter";
+import EmployeeFilter from "./Filters";
 import Pagination from "../../globals/layout/Pagination";
 import {
   formatDate,
